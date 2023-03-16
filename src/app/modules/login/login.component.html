@@ -1,10 +1,8 @@
 <div class="container" row>
-    <mat-card class="card-dashboard" flex="75">
-        <mat-card-content>
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        </mat-card-content>
-    </mat-card>
-    <mat-card class="card-login" flex>
+    <div class="card-dashboard">
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    </div>
+    <mat-card class="card-login">
         <mat-card-header>
             <mat-card-title>Login</mat-card-title>
         </mat-card-header>
@@ -20,6 +18,9 @@
                     <input matInput type="password" formControlName="password">
                     <mat-icon matSuffix>lock</mat-icon>
                 </mat-form-field>
+                <div>
+                    <label>Aun no tienes un usuario?</label><button mat-button color="accent" routerLink="/sign-up">Registrarse</button>
+                </div>
             </form>
         </mat-card-content>
         <mat-card-actions>
