@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { SignUpRoutingModule } from './sign-up-routing.module';
-import { SignUpComponent } from './sign-up.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {SignUpRoutingModule} from './sign-up-routing.module';
+import {SignUpComponent} from './sign-up.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 // Angular Material //
 import {MatInputModule} from '@angular/material/input';
@@ -28,4 +28,5 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatGridListModule
   ]
 })
-export class SignUpModule { }
+export class SignUpModule {
+}

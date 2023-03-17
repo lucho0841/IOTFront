@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { SignUpUser } from 'src/app/models/signUpUser';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {SignUpUser} from 'src/app/models/auth/sign-up-user';
+import {AuthService} from 'src/app/services/auth/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,12 +13,13 @@ import Swal from 'sweetalert2';
 export class SignUpComponent implements OnInit {
 
   form!: FormGroup;
-  loginUrl: string = environment.loginUrlBase;
+
   constructor(
     private formBuilder: FormBuilder,
-    private _router: Router,
+    private router: Router,
     private authService: AuthService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -27,8 +27,8 @@ export class SignUpComponent implements OnInit {
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      fullName: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
@@ -38,13 +38,7 @@ export class SignUpComponent implements OnInit {
   register(): void {
     if (this.form.status == "VALID") {
       if (this.form.controls['password'].value == this.form.controls['confirmPassword'].value) {
-        const signUpUser: SignUpUser = new SignUpUser(
-          this.form.value.name, 
-          this.form.value.lastName,
-          this.form.value.email,
-          this.form.value.password
-          );
-        this.authService.signUp(signUpUser).toPromise().then(answer => {
+        this.authService.signUp(this.formValue).toPromise().then(answer => {
           Swal.fire({
             title: 'Registro completado!',
             text: 'Su usuario ha sido registrado correctamente!',
@@ -52,7 +46,7 @@ export class SignUpComponent implements OnInit {
             confirmButtonText: 'Cool'
           }).then(() => {
             console.log(answer);
-            this._router.navigateByUrl(this.loginUrl);
+            this.router.navigateByUrl('/login');
           })
         })
       } else {
@@ -72,6 +66,10 @@ export class SignUpComponent implements OnInit {
       })
     }
     console.log(this.form.value);
+  }
+
+  get formValue(): SignUpUser {
+    return this.form.value;
   }
 
 }
