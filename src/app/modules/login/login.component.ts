@@ -5,6 +5,7 @@ import {LoginUser} from 'src/app/models/auth/login-user';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {TokenService} from 'src/app/services/auth/token/token.service';
 import Swal from 'sweetalert2';
+import {CookieService} from "../../services/auth/cookie/cookie.service";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private cookieService: CookieService
   ) {
 
   }
@@ -30,6 +32,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.cookieService.setItem('token', '12324534256');
+    console.log(document.cookie)
     if (this.form.status == "VALID") {
       this.authService.login(this.formValue).toPromise().then(token => {
         this.isLogged = true;
