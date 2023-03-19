@@ -32,8 +32,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    debugger;
     this.cookieService.setItem('token', '12324534256');
-    console.log(document.cookie)
+    console.log(this.cookieService.getItem('token'));
+    this.cookieService.setItem('user', 'brayanesq');
+    console.log(this.cookieService.getItem('user'));
+    this.cookieService.setItem('user', 'sesega');
+    console.log(this.cookieService.getItem('user'))
+    this.cookieService.removeItem('user');
+    console.log(this.cookieService.getItem('user'));
     if (this.form.status == "VALID") {
       this.authService.login(this.formValue).toPromise().then(token => {
         this.isLogged = true;

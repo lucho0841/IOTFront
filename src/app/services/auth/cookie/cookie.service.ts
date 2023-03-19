@@ -12,23 +12,28 @@ export class CookieService {
   }
 
   setItem(item: string, value: string): void {
-    const dictionary: Record<string, string> = this.getCookiesDictionary();
-    dictionary[item] = value;
-    document.cookie = Object.entries(dictionary)
-      .map(([clave, valor]) => `${clave}=${valor}`).join(";");
+    document.cookie = `${item}=${value}`;
   }
 
   getItem(item: string): string {
     return this.getCookiesDictionary()[item];
   }
 
+  removeItem(item: string) {
+    document.cookie = `${item}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+
   getCookiesDictionary(): Record<string, string> {
-    const cookiesList: string[] = document.cookie.split(';');
     const dictionary: Record<string, string> = {};
-    cookiesList.forEach(cookieString => {
-      const cookie: string[] = cookieString.split('=');
-      dictionary[cookie[ITEM]] = cookie[VALUE];
-    });
+    const cookieString: string = document.cookie;
+    if (cookieString.length > 0) {
+      const cookiesList: string[] = cookieString.split('; ');
+      cookiesList.forEach(cookieString => {
+        const cookie: string[] = cookieString.split('=');
+        dictionary[cookie[ITEM]] = cookie[VALUE];
+      });
+    }
+
     return dictionary;
   }
 }
