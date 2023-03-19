@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.formValue).toPromise().then(token => {
         this.isLogged = true;
         this.tokenService.setToken(token);
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl(sessionStorage.getItem('redirectTo') || '/dashboard');
       }).catch(err => {
         this.isLogged = false;
         this.errMsj = err.error.message;
