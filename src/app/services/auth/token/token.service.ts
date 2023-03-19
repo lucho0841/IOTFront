@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {CookieService} from "../cookie/cookie.service";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -6,19 +7,19 @@ const TOKEN_KEY = 'AuthToken';
   providedIn: 'root'
 })
 export class TokenService {
-  constructor() {
+  constructor(private cookieService: CookieService) {
   }
 
   public setToken(token: string): void {
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.setItem(TOKEN_KEY, token);
+    this.cookieService.setItem(TOKEN_KEY, token);
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY) || '';
+    return this.cookieService.getItem(TOKEN_KEY);
   }
 
   public logOut(): void {
     window.sessionStorage.clear();
+    Object.keys(this.cookieService.getCookiesDictionary()).forEach(item => this.cookieService.removeItem(item));
   }
 }
