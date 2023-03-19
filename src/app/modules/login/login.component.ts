@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
   }
-
+//todo hacer clase utilitaria para los mensajes
   login(): void {
     if (this.form.status == "VALID") {
       this.authService.login(this.formValue).toPromise().then(token => {

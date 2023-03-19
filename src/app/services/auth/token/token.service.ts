@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CookieService} from "../cookie/cookie.service";
+import {Router} from "@angular/router";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -7,7 +8,7 @@ const TOKEN_KEY = 'AuthToken';
   providedIn: 'root'
 })
 export class TokenService {
-  constructor(private cookieService: CookieService) {
+  constructor(private cookieService: CookieService, private router: Router) {
   }
 
   public setToken(token: string): void {
@@ -21,5 +22,6 @@ export class TokenService {
   public logOut(): void {
     window.sessionStorage.clear();
     Object.keys(this.cookieService.getCookiesDictionary()).forEach(item => this.cookieService.removeItem(item));
+    this.router.navigateByUrl('login');
   }
 }
