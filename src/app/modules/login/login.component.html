@@ -1,33 +1,34 @@
-<div class="container" row>
-    <div class="card-dashboard">
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+<div class="container">
+  <div class="card-dashboard">
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  </div>
+  <mat-card class="card-login">
+    <img mat-card-image src="/assets/img/paw.png" class="logo" alt="imagen de logo">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="inputs" [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Correo</mat-label>
+          <input matInput type="text" formControlName="email">
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="login()">
+        Ingresar
+      </button>
+    </mat-card-actions>
+    <div>
+      <label>Aun no tienes un usuario?</label>
+      <button mat-button color="accent" routerLink="/sign-up">Registrarse</button>
     </div>
-    <mat-card class="card-login">
-        <img mat-card-image src="/assets/img/paw.png" class="logo">
-        <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form class="inputs" [formGroup]="form">
-                <mat-form-field>
-                    <mat-label>Correo</mat-label>
-                    <input matInput type="text" formControlName="email">
-                    <mat-icon matSuffix>person</mat-icon>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Contraseña</mat-label>
-                    <input matInput type="password" formControlName="password">
-                    <mat-icon matSuffix>lock</mat-icon>
-                </mat-form-field>
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="login()">
-                Ingresar
-            </button>
-        </mat-card-actions>
-        <div>
-            <label>Aun no tienes un usuario?</label><button mat-button color="accent" routerLink="/sign-up">Registrarse</button>
-        </div>
-    </mat-card>
+  </mat-card>
 </div>

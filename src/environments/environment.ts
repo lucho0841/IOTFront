@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  loginUrlBase: '/login',
-  baseURL_identityService: 'api',
+  baseUrl: '/api',
 };
 
 /*
