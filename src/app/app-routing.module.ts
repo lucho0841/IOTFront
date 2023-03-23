@@ -15,6 +15,14 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'mascota',
+        loadChildren: () => import('./modules/mascota/mascota.module').then(m => m.MascotaModule)
+      },
+      {
+        path: 'alimentador',
+        loadChildren: () => import('./modules/alimentador/alimentador.module').then(m => m.AlimentadorModule)
       }
     ]
   },
