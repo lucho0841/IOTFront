@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "./guardians/auth/auth.guard";
+import {SidenavComponent} from "./components/sidenav/sidenav.component";
 
 const routes: Routes = [
   {
     path: '',
+    component: SidenavComponent,
     canActivateChild: [AuthGuard],
     children: [
       {

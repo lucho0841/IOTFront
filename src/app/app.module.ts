@@ -10,12 +10,15 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import {DashboardModule} from "./modules/dashboard/dashboard.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    DashboardModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
