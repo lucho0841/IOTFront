@@ -1,1 +1,24 @@
-<p>mascota works!</p>
+<div class="container">
+  <button mat-raised-button color="primary" (click)="addNewPet()">Agregar
+  </button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Peso</th>
+      <th scope="col">Especie</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pet of petList; let i = index" (click)="setPet(pet)">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{pet.name}}</td>
+      <td>{{pet.weight}}</td>
+      <td>{{pet.species}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
