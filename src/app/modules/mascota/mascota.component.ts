@@ -53,4 +53,12 @@ export class MascotaComponent implements OnInit {
     this.petService.resetPet();
     this.openDialog();
   }
+
+  removePet(petToRemove: Pet) {
+    this.petService.delete(petToRemove).then(answer => {
+      const index = this.petList.findIndex(pet => pet.id === answer.id);
+      this.petList.splice(index, 1);
+      UtilAlert.success({title: 'Eliminado exitoso'});
+    });
+  }
 }

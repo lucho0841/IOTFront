@@ -9,6 +9,7 @@ import {PetFormComponent} from './components/pet-form/pet-form.component';
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ]
 })
 export class MascotaModule {

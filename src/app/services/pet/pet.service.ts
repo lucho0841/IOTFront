@@ -41,6 +41,11 @@ export class PetService {
     return this.http.post<Pet>(`${environment.baseUrl}/pet/update`, pet).toPromise();
   }
 
+  delete(pet: Pet): Promise<Pet> {
+    return of(pet).toPromise();
+    return this.http.delete<Pet>(`${environment.baseUrl}/pet/delete/${pet.id}`).toPromise();
+  }
+
   buildDefaultPet(): Pet {
     return {
       id: 1,

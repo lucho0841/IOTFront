@@ -8,14 +8,20 @@
       <th scope="col">Nombre</th>
       <th scope="col">Peso</th>
       <th scope="col">Especie</th>
+      <th scope="col">Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let pet of petList; let i = index" (click)="setPet(pet)">
-      <th scope="row">{{i + 1}}</th>
-      <td>{{pet.name}}</td>
-      <td>{{pet.weight}}</td>
-      <td>{{pet.species}}</td>
+    <tr *ngFor="let pet of petList; let i = index">
+      <th scope="row" (click)="setPet(pet)">{{i + 1}}</th>
+      <td (click)="setPet(pet)">{{pet.name}}</td>
+      <td (click)="setPet(pet)">{{pet.weight}}</td>
+      <td (click)="setPet(pet)">{{pet.species}}</td>
+      <td (click)="removePet(pet)">
+        <button mat-mini-fab color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>
