@@ -1,0 +1,30 @@
+<div class="container">
+  <button mat-raised-button color="primary" (click)="addNewPet()">Agregar
+  </button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Peso</th>
+      <th scope="col">Especie</th>
+      <th scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pet of petList; let i = index">
+      <th scope="row" (click)="setPet(pet)">{{i + 1}}</th>
+      <td (click)="setPet(pet)">{{pet.name}}</td>
+      <td (click)="setPet(pet)">{{pet.weight}}</td>
+      <td (click)="setPet(pet)">{{pet.species}}</td>
+      <td (click)="removePet(pet)">
+        <button mat-mini-fab color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
