@@ -7,10 +7,10 @@ import {PetService} from "../../services/pet/pet.service";
 
 @Component({
   selector: 'app-mascota',
-  templateUrl: './mascota.component.html',
-  styleUrls: ['./mascota.component.scss']
+  templateUrl: './pet.component.html',
+  styleUrls: ['./pet.component.scss']
 })
-export class MascotaComponent implements OnInit {
+export class PetComponent implements OnInit {
   petList!: Pet[];
 
   constructor(private dialog: MatDialog, private petService: PetService) {

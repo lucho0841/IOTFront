@@ -21,7 +21,7 @@ export class SidenavComponent {
   }, {
     title: 'Alimentadores',
     icon: 'solar_power',
-    route: '/alimentador'
+    route: '/feeder'
   }]
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -29,7 +29,7 @@ export class SidenavComponent {
       map(result => result.matches),
       shareReplay()
     );
-  
+
   private _mobileQueryListener : () => void;
 
   constructor(private breakpointObserver: BreakpointObserver, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {

@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {MascotaRoutingModule} from './mascota-routing.module';
-import {MascotaComponent} from './mascota.component';
+import {PetRoutingModule} from './pet-routing.module';
+import {PetComponent} from './pet.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {PetFormComponent} from './components/pet-form/pet-form.component';
@@ -14,12 +14,12 @@ import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
-    MascotaComponent,
+    PetComponent,
     PetFormComponent
   ],
   imports: [
     CommonModule,
-    MascotaRoutingModule,
+    PetRoutingModule,
     MatTableModule,
     MatButtonModule,
     MatInputModule,
@@ -28,5 +28,5 @@ import {MatIconModule} from "@angular/material/icon";
     MatIconModule
   ]
 })
-export class MascotaModule {
+export class PetModule {
 }
