@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'mascota',
-        loadChildren: () => import('./modules/mascota/mascota.module').then(m => m.MascotaModule)
+        loadChildren: () => import('./modules/mascota/pet.module').then(m => m.PetModule)
       },
       {
         path: 'alimentador',
