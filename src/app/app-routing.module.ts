@@ -23,8 +23,8 @@ const routes: Routes = [
         loadChildren: () => import('./modules/mascota/pet.module').then(m => m.PetModule)
       },
       {
-        path: 'alimentador',
-        loadChildren: () => import('./modules/alimentador/alimentador.module').then(m => m.AlimentadorModule)
+        path: 'feeder',
+        loadChildren: () => import('./modules/feeder/feeder.module').then(m => m.FeederModule)
       }
     ]
   },
