@@ -22,6 +22,8 @@ export class PetFormComponent implements OnInit {
   }
 
   save(): void {
+    if (!this.validateForm()) return;
+
     const pet: Pet = this.formValue;
     if (pet.id > 0) {
       this.petService.update(pet).then(answer => {
@@ -34,6 +36,10 @@ export class PetFormComponent implements OnInit {
         UtilAlert.success({title: 'Creado exitoso'});
       });
     }
+  }
+
+  validateForm(): boolean {
+    return this.form.valid;
   }
 
   sendPet(pet: Pet): void {
