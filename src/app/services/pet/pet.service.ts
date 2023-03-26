@@ -31,7 +31,7 @@ export class PetService {
   }
 
   create(pet: Pet): Promise<Pet> {
-    pet.id = 1;
+    pet.id = 10;
     return of(pet).toPromise();
     return this.http.post<Pet>(`${environment.baseUrl}/pet/create`, pet).toPromise();
   }

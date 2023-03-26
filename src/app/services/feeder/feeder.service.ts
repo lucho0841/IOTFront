@@ -29,7 +29,7 @@ export class FeederService {
   }
 
   create(feeder: Feeder): Promise<Feeder> {
-    feeder.id = 1;
+    feeder.id = 10;
     return of(feeder).toPromise();
     return this.http.post<Feeder>(`${environment.baseUrl}/feeder/create`, feeder).toPromise();
   }

@@ -41,18 +41,13 @@ export class PetComponent implements OnInit, AfterViewInit {
   }
 
   save(pet: Pet): void {
-    if (pet.id > 0) {
-      this.petService.update(pet).then(answer => {
-        const index = this.petList.findIndex(pet => pet.id === answer.id);
-        this.petList[index] = answer;
-        this.updateDataList();
-      });
+    const index = this.petList.findIndex(petTmp => petTmp.id === pet.id);
+    if (index !== -1) {
+      this.petList[index] = pet;
     } else {
-      this.petService.create(pet).then(answer => {
-        this.petList.push(answer);
-        this.updateDataList();
-      });
+      this.petList.push(pet);
     }
+    this.updateDataList();
   }
 
   updatePet(pet: Pet): void {

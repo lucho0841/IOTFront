@@ -71,5 +71,4 @@ export class PetFormComponent implements OnInit {
     return this.form.value;
   }
 
-
 }
