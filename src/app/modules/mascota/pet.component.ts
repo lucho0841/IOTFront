@@ -24,7 +24,6 @@ export class PetComponent implements OnInit, AfterViewInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(PetFormComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) this.save(result);
     });
@@ -47,13 +46,11 @@ export class PetComponent implements OnInit, AfterViewInit {
         const index = this.petList.findIndex(pet => pet.id === answer.id);
         this.petList[index] = answer;
         this.updateDataList();
-        UtilAlert.success({title: 'Editado correctamente'});
       });
     } else {
       this.petService.create(pet).then(answer => {
         this.petList.push(answer);
         this.updateDataList();
-        UtilAlert.success({title: 'Creado exitoso'});
       });
     }
   }

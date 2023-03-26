@@ -15,7 +15,7 @@
   </form>
   <div class="actions">
     <button mat-raised-button mat-dialog-close="" color="warn">Cerrar</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="formValue">Guardar</button>
+    <button mat-raised-button color="primary" (click)="save()">Guardar</button>
   </div>
 </div>
 
