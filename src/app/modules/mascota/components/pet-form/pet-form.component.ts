@@ -22,24 +22,35 @@ export class PetFormComponent implements OnInit {
   }
 
   save(): void {
-    if (!this.validateForm()) return;
+    try {
+      this.validateForm();
+    } catch (error) {
+      UtilAlert.error({title: error.message});
+      return;
+    }
 
     const pet: Pet = this.formValue;
-    if (pet.id > 0) {
-      this.petService.update(pet).then(answer => {
-        this.sendPet(answer);
-        UtilAlert.success({title: 'Editado correctamente'});
-      });
-    } else {
-      this.petService.create(pet).then(answer => {
-        this.sendPet(answer);
-        UtilAlert.success({title: 'Creado exitoso'});
-      });
-    }
+    if (pet.id > 0) this.update(pet);
+    else this.create(pet);
   }
 
-  validateForm(): boolean {
-    return this.form.valid;
+  private create(pet: Pet): void {
+    this.petService.create(pet).then(answer => {
+      this.sendPet(answer);
+      UtilAlert.success({title: 'Creado exitoso'});
+    });
+  }
+
+  private update(pet: Pet): void {
+    this.petService.update(pet).then(answer => {
+      this.sendPet(answer);
+      UtilAlert.success({title: 'Editado correctamente'});
+    });
+  }
+
+  validateForm(): void {
+    if (!this.form.valid) throw new Error('Formulario inválido');
+    if (this.form.pristine) throw new Error('Aún no se detectaron cambios');
   }
 
   sendPet(pet: Pet): void {
