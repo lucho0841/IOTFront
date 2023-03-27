@@ -14,25 +14,27 @@ import { MatIconModule } from '@angular/material/icon';
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    DashboardModule,
-    MatSidenavModule,
-    MatListModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        DashboardModule,
+        MatSidenavModule,
+        MatListModule,
+        MatMenuModule,
+    ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
