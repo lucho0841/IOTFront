@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.form.status == "VALID") {
-      this.authService.login(this.formValue).toPromise().then(token => {
+      this.authService.login(this.formValue).then(token => {
         this.tokenService.setToken(token);
         UtilAlert.success();
         this.router.navigateByUrl(sessionStorage.getItem('redirectTo') || '/dashboard').then();
