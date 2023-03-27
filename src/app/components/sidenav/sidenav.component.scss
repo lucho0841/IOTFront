@@ -45,3 +45,14 @@ h1.example-app-name {
 .menu-icon {
   margin-right: 10px;
 }
+
+.mat-menu-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.mat-menu-button mat-icon {
+  margin: 0;
+}
