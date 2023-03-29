@@ -9,3 +9,10 @@ mat-form-field {
   grid-gap: 20px;
   justify-content: space-between;
 }
+
+.align-right {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+}

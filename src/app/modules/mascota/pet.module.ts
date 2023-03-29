@@ -12,6 +12,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSortModule} from "@angular/material/sort";
+import {MatSelectModule} from "@angular/material/select";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {MatSortModule} from "@angular/material/sort";
     MatDialogModule,
     MatIconModule,
     MatMenuModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule,
+    MatTooltipModule
   ]
 })
 export class PetModule {
