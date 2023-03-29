@@ -12,6 +12,14 @@
       <mat-label>Especie</mat-label>
       <input matInput formControlName="species">
     </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccione un alimentador</mat-label>
+      <mat-select formControlName="feederId">
+        <mat-option *ngFor="let feeder of feederList" [value]="feeder.id">
+          {{feeder.serial}} -> {{feeder.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
   <div class="actions">
     <button mat-raised-button mat-dialog-close="" color="warn">Cerrar</button>

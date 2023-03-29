@@ -12,6 +12,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSortModule} from "@angular/material/sort";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -19,18 +20,19 @@ import {MatSortModule} from "@angular/material/sort";
     PetComponent,
     PetFormComponent
   ],
-  imports: [
-    CommonModule,
-    PetRoutingModule,
-    MatTableModule,
-    MatButtonModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatIconModule,
-    MatMenuModule,
-    MatSortModule
-  ]
+    imports: [
+        CommonModule,
+        PetRoutingModule,
+        MatTableModule,
+        MatButtonModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatIconModule,
+        MatMenuModule,
+        MatSortModule,
+        MatSelectModule
+    ]
 })
 export class PetModule {
 }
