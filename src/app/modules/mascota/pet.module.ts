@@ -10,6 +10,8 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatSortModule} from "@angular/material/sort";
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {MatIconModule} from "@angular/material/icon";
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    MatSortModule
   ]
 })
 export class PetModule {

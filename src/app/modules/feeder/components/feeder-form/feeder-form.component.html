@@ -1,16 +1,12 @@
 <div class="container">
   <form [formGroup]="form">
     <mat-form-field class="example-full-width">
-      <mat-label>Nombre mascota</mat-label>
-      <input matInput formControlName="name" value="data">
+      <mat-label>Serial alimentador</mat-label>
+      <input matInput formControlName="serial" value="data">
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <mat-label>Peso mascota</mat-label>
-      <input matInput formControlName="weight">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Especie</mat-label>
-      <input matInput formControlName="species">
+      <mat-label>nombre alimentador</mat-label>
+      <input matInput formControlName="name">
     </mat-form-field>
   </form>
   <div class="actions">
@@ -18,4 +14,3 @@
     <button mat-raised-button color="primary" (click)="save()">Guardar</button>
   </div>
 </div>
-

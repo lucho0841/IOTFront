@@ -31,7 +31,7 @@ export class PetService {
   }
 
   create(pet: Pet): Promise<Pet> {
-    pet.id = 1;
+    pet.id = 10;
     return of(pet).toPromise();
     return this.http.post<Pet>(`${environment.baseUrl}/pet/create`, pet).toPromise();
   }
@@ -46,21 +46,11 @@ export class PetService {
     return this.http.delete<Pet>(`${environment.baseUrl}/pet/delete/${pet.id}`).toPromise();
   }
 
-  buildDefaultPet(): Pet {
-    return {
-      id: 1,
-      name: 'Lucas',
-      weight: '8kg',
-      species: 'Perro',
-      feeder: undefined
-    };
-  }
-
   buildDefaultList(): Pet[] {
     const petList = [];
     for (let i = 0; i < 10; i++) {
       petList.push({
-        id: i+1,
+        id: i,
         name: `name${i}`,
         weight: `weight${i}`,
         species: `species${i}`,
