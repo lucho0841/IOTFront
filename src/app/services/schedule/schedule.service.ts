@@ -12,12 +12,12 @@ export class ScheduleService {
   constructor(private http: HttpClient) { }
 
   getSchedule(petId: number): Promise<Schedule> {
-    return of({petId, scheduleList: ['08:00', '13:00', '20:00']}).toPromise();
+    // return of({petId, scheduleList: ['08:00', '13:00', '20:00']}).toPromise();
     return this.http.get<Schedule>(`${environment.baseUrl}/schedule/${petId}`).toPromise();
   }
 
   save(schedule: Schedule): Promise<Schedule> {
-    return of(schedule).toPromise();
+    // return of(schedule).toPromise();
     return this.http.post<Schedule>(`${environment.baseUrl}/schedule/create`, schedule).toPromise();
   }
 }

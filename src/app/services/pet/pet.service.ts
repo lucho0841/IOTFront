@@ -26,23 +26,23 @@ export class PetService {
   }
 
   getAllPetList(): Promise<Pet[]> {
-    return of(this.buildDefaultList()).toPromise();
+    // return of(this.buildDefaultList()).toPromise();
     return this.http.get<Pet[]>(`${environment.baseUrl}/pet/all`).toPromise();
   }
 
   create(pet: Pet): Promise<Pet> {
     pet.id = 10;
-    return of(pet).toPromise();
+    // return of(pet).toPromise();
     return this.http.post<Pet>(`${environment.baseUrl}/pet/create`, pet).toPromise();
   }
 
   update(pet: Pet): Promise<Pet> {
-    return of(pet).toPromise();
+    // return of(pet).toPromise();
     return this.http.post<Pet>(`${environment.baseUrl}/pet/update`, pet).toPromise();
   }
 
   delete(pet: Pet): Promise<Pet> {
-    return of(pet).toPromise();
+    // return of(pet).toPromise();
     return this.http.delete<Pet>(`${environment.baseUrl}/pet/delete/${pet.id}`).toPromise();
   }
 

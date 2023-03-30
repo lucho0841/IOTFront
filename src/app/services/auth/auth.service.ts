@@ -14,13 +14,13 @@ export class AuthService {
   }
 
   public signUp(signUpUser: SignUpUser): Promise<void> {
-    return EMPTY.toPromise();
+    // return EMPTY.toPromise();
     const methodURL = `${environment.baseUrl}/auth/sign-up`;
     return this.httpClient.post<any>(methodURL, signUpUser).toPromise();
   }
 
   public login(loginUser: LoginUser): Promise<string> {
-    return  of('skjlnjkbkjjhsfbjhdsbfhjbs').toPromise();
+    // return  of('skjlnjkbkjjhsfbjhdsbfhjbs').toPromise();
     const methodURL = `${environment.baseUrl}/auth/login`;
     return this.httpClient.post<any>(methodURL, loginUser).toPromise();
   }
