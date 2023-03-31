@@ -18,6 +18,6 @@ export class ScheduleService {
 
   save(schedule: Schedule): Promise<Schedule> {
     // return of(schedule).toPromise();
-    return this.http.post<Schedule>(`${environment.baseUrl}/schedule/create`, schedule).toPromise();
+    return this.http.post<Schedule>(`${environment.baseUrl}/schedule/save`, schedule).toPromise();
   }
 }

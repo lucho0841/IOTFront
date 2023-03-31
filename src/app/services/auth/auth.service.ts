@@ -4,6 +4,7 @@ import {EMPTY, of} from "rxjs";
 import {SignUpUser} from 'src/app/models/auth/sign-up-user';
 import {LoginUser} from 'src/app/models/auth/login-user';
 import {environment} from 'src/environments/environment';
+import {User} from "../../models/user/user";
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,13 @@ export class AuthService {
 
   public signUp(signUpUser: SignUpUser): Promise<void> {
     // return EMPTY.toPromise();
-    const methodURL = `${environment.baseUrl}/auth/sign-up`;
+    const methodURL = `${environment.baseUrl}/user`;
     return this.httpClient.post<any>(methodURL, signUpUser).toPromise();
   }
 
-  public login(loginUser: LoginUser): Promise<string> {
+  public login(loginUser: LoginUser): Promise<{ user: User; token: string }> {
     // return  of('skjlnjkbkjjhsfbjhdsbfhjbs').toPromise();
     const methodURL = `${environment.baseUrl}/auth/login`;
-    return this.httpClient.post<any>(methodURL, loginUser).toPromise();
+    return this.httpClient.post<{ user: User; token: string }>(methodURL, loginUser).toPromise();
   }
 }

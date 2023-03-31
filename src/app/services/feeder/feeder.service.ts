@@ -25,23 +25,23 @@ export class FeederService {
 
   getAllFeederList(): Promise<Feeder[]> {
     // return of(this.buildDefaultList()).toPromise();
-    return this.http.get<Feeder[]>(`${environment.baseUrl}/feeder/all`).toPromise();
+    return this.http.get<Feeder[]>(`${environment.baseUrl}/feeder`).toPromise();
   }
 
   create(feeder: Feeder): Promise<Feeder> {
     feeder.id = 10;
     // return of(feeder).toPromise();
-    return this.http.post<Feeder>(`${environment.baseUrl}/feeder/create`, feeder).toPromise();
+    return this.http.post<Feeder>(`${environment.baseUrl}/feeder`, feeder).toPromise();
   }
 
   update(feeder: Feeder): Promise<Feeder> {
     // return of(feeder).toPromise();
-    return this.http.put<Feeder>(`${environment.baseUrl}/feeder/update`, feeder).toPromise();
+    return this.http.put<Feeder>(`${environment.baseUrl}/feeder`, feeder).toPromise();
   }
 
   delete(feeder: Feeder): Promise<Feeder> {
     // return of(feeder).toPromise();
-    return this.http.delete<Feeder>(`${environment.baseUrl}/feeder/create/${feeder.id}`).toPromise();
+    return this.http.delete<Feeder>(`${environment.baseUrl}/feeder/${feeder.id}`).toPromise();
   }
 
   buildDefaultList(): Feeder[] {

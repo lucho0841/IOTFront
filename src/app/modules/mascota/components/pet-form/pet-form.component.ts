@@ -88,7 +88,6 @@ export class PetFormComponent implements OnInit {
   }
 
   sendPet(pet: Pet): void {
-    console.log(pet);
     this.dialogRef.close(pet);
   }
 
