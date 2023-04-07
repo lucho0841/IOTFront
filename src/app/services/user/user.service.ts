@@ -6,14 +6,14 @@ import {User} from "../../models/user/user";
 })
 export class UserService {
 
-  private static user: User;
+  private static user: User | undefined;
   constructor() { }
 
-  static getUser(): User {
+  static getUser(): User | undefined {
     return this.user;
   }
 
-  static setUser(user: User): void {
+  static setUser(user: User | undefined): void {
     this.user = user;
   }
 
