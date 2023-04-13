@@ -5,7 +5,6 @@ import {LoginUser} from 'src/app/models/auth/login-user';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {TokenService} from 'src/app/services/auth/token/token.service';
 import {UtilAlert} from "../../util/util-alert";
-import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'app-login',
@@ -31,9 +30,8 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.form.status == "VALID") {
-      this.authService.login(this.formValue).then(answer => {
-        this.tokenService.setToken(answer.token);
-        UserService.setUser(answer.user);
+      this.authService.login(this.formValue).then(token => {
+        this.tokenService.setToken(token);
         UtilAlert.success();
         this.router.navigateByUrl(sessionStorage.getItem('redirectTo') || '/dashboard').then();
       });
