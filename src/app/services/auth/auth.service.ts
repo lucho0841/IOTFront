@@ -16,8 +16,7 @@ export class AuthService {
   }
 
   public signUp(signUpUser: SignUpUser): Promise<void> {
-    // return EMPTY.toPromise();
-    const methodURL = `${environment.baseUrl}/user`;
+    const methodURL = `${environment.baseUrl}/api/user/public/sign-up`;
     return this.httpClient.post<any>(methodURL, signUpUser).toPromise();
   }
 
