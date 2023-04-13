@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: SidenavComponent,
+    canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
       {
