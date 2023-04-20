@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Feeder} from "../../models/feeder/feeder";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -24,38 +23,20 @@ export class FeederService {
   }
 
   getAllFeederList(): Promise<Feeder[]> {
-    return of(this.buildDefaultList()).toPromise();
-    return this.http.get<Feeder[]>(`${environment.baseUrl}/feeder/all`).toPromise();
+    return this.http.get<Feeder[]>(`${environment.baseUrl}/api/feeder/get-all`).toPromise();
   }
 
   create(feeder: Feeder): Promise<Feeder> {
     feeder.id = 10;
-    return of(feeder).toPromise();
-    return this.http.post<Feeder>(`${environment.baseUrl}/feeder/create`, feeder).toPromise();
+    return this.http.post<Feeder>(`${environment.baseUrl}/api/feeder/create`, feeder).toPromise();
   }
 
   update(feeder: Feeder): Promise<Feeder> {
-    return of(feeder).toPromise();
-    return this.http.put<Feeder>(`${environment.baseUrl}/feeder/update`, feeder).toPromise();
+    return this.http.put<Feeder>(`${environment.baseUrl}/api/feeder/update`, feeder).toPromise();
   }
 
   delete(feeder: Feeder): Promise<Feeder> {
-    return of(feeder).toPromise();
-    return this.http.delete<Feeder>(`${environment.baseUrl}/feeder/create/${feeder.id}`).toPromise();
-  }
-
-  buildDefaultList(): Feeder[] {
-    {
-      const feederList = [];
-      for (let i = 0; i < 10; i++) {
-        feederList.push({
-          id: i,
-          serial: `serial${i}`,
-          name: `name${i}`
-        });
-      }
-      return feederList;
-    }
+    return this.http.delete<Feeder>(`${environment.baseUrl}/api/feeder/delete/${feeder.id}`).toPromise();
   }
 
 }

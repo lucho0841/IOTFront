@@ -58,7 +58,6 @@ export class SignUpComponent implements OnInit {
         buttonText: 'Vale'
       });
     }
-    console.log(this.form.value);
   }
 
   get formValue(): SignUpUser {
