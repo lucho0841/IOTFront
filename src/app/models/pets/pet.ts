@@ -7,5 +7,5 @@ export interface Pet {
   weight: number;
   species: string;
   feeder: Feeder | undefined;
-  schedule?: Schedule;
+  scheduleList?: Schedule[];
 }

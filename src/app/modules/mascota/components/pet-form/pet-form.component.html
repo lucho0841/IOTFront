@@ -23,7 +23,7 @@
     <hr>
     <h3><b>Horario Alimentación</b></h3>
     <div formArrayName="scheduleList">
-      <div *ngFor="let schedule of scheduleList.controls; let i = index" class="d-flex justify-content-between">
+      <div *ngFor="let schedule of scheduleListFA.controls; let i = index" class="d-flex justify-content-between">
         <mat-form-field class="example-full-width">
           <mat-label>Hora</mat-label>
           <input matInput type="time" [formControlName]="i">

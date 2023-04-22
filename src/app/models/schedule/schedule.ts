@@ -1,4 +1,9 @@
+import {Time} from "@angular/common";
+import {Pet} from "../pets/pet";
+
 export interface Schedule {
-  petId: number;
-  scheduleList: string[];
+  id: number;
+  time: Time;
+  portion: number;
+  pet: Pet;
 }
