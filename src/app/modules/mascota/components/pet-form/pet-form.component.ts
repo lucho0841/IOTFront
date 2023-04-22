@@ -99,7 +99,7 @@ export class PetFormComponent implements OnInit {
         id: '',
         time: ['', Validators.required],
         portion: ['', Validators.required],
-        pet: [undefined, Validators.required]
+        pet: undefined
       }));
     }
   }
@@ -112,8 +112,7 @@ export class PetFormComponent implements OnInit {
   private create(pet: Pet): void {
     this.petService.create(pet).then(createdPet => {
       if (this.buildScheduleList().length > 0) {
-        this.scheduleListFA.controls.forEach(scheduleControl =>
-          scheduleControl.get('pet')?.setValue(pet));
+        this.setPetInScheduleListFA(createdPet);
         this.scheduleService.save(this.buildScheduleList()).then(sheduleList => {
           createdPet.scheduleList = sheduleList;
           this.sendPet(createdPet);
@@ -129,6 +128,8 @@ export class PetFormComponent implements OnInit {
   private update(pet: Pet): void {
     this.petService.update(pet).then(updatedPet => {
       if (this.scheduleListFA.dirty && this.buildScheduleList().length > 0) {
+        this.setPetInScheduleListFA(updatedPet);
+        console.log(this.buildScheduleList());
         this.scheduleService.save(this.buildScheduleList()).then(sheduleList => {
           updatedPet.scheduleList = sheduleList;
           this.sendPet(updatedPet);
@@ -141,6 +142,10 @@ export class PetFormComponent implements OnInit {
     });
   }
 
+  private setPetInScheduleListFA(pet: Pet): void {
+    this.scheduleListFA.controls.forEach(scheduleControl =>
+      scheduleControl.get('pet')?.setValue(pet));
+  }
 
   private buildPet(): Pet {
     return {
