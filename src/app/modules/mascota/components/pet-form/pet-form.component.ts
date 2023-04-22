@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Pet} from "../../../../models/pets/pet";
 import {PetService} from "../../../../services/pet/pet.service";
 import {MatDialogRef} from "@angular/material/dialog";
@@ -17,7 +17,7 @@ import {ScheduleService} from "../../../../services/schedule/schedule.service";
 export class PetFormComponent implements OnInit {
 
   form!: FormGroup;
-  feederList!: Feeder[];
+  feederList: Feeder[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,10 +31,10 @@ export class PetFormComponent implements OnInit {
   ngOnInit(): void {
     const pet: Pet | undefined = this.petService.getPet();
     this.buildForm();
-    Promise.all([this.feederService.getAllFeederList(), this.scheduleService.getSchedule(pet?.id || 0)])
+    Promise.all([this.feederService.getAllFeederList(), this.scheduleService.getAllScheduleList(pet?.id || 0)])
       .then(answer => {
         this.feederList = answer[0];
-        if (pet) pet.schedule = answer[1];
+        if (pet) pet.scheduleList = answer[1];
         this.buildForm();
       });
   }
@@ -52,36 +52,6 @@ export class PetFormComponent implements OnInit {
     else this.create(pet);
   }
 
-  private create(pet: Pet): void {
-    this.petService.create(pet).then(answer => {
-      if (pet.schedule) {
-        this.scheduleService.save(this.buildSchedule()).then(shedule => {
-          answer.schedule = shedule;
-          this.sendPet(answer);
-          UtilAlert.success({title: 'Mascota y horario creado correctamente'});
-          return;
-        });
-      }
-      this.sendPet(answer);
-      UtilAlert.success({title: 'Creado correctamente'});
-    });
-  }
-
-  private update(pet: Pet): void {
-    this.petService.update(pet).then(answer => {
-      if (pet.schedule) {
-        this.scheduleService.save(this.buildSchedule()).then(shedule => {
-          answer.schedule = shedule;
-          this.sendPet(answer);
-          UtilAlert.success({title: 'Mascota y horario editado correctamente'});
-          return;
-        });
-      }
-      this.sendPet(answer);
-      UtilAlert.success({title: 'Editado correctamente'});
-    });
-  }
-
   validateForm(): void {
     if (!this.form.valid) throw new Error('Formulario inválido');
     if (this.form.pristine) throw new Error('Aún no se detectaron cambios');
@@ -93,37 +63,88 @@ export class PetFormComponent implements OnInit {
 
   buildForm(): void {
     const pet = this.petService.getPet();
-    const scheduleControlList = this.formBuilder.array([]);
-    pet?.schedule?.scheduleList.forEach(time => scheduleControlList.push(new FormControl(time)));
 
-    this.form = this.formBuilder.group(pet ? {
-      id: [pet.id, [Validators.required]],
-      name: [pet.name, [Validators.required]],
-      weight: [pet.weight, [Validators.required]],
-      species: [pet.species, [Validators.required]],
-      feederId: pet.feeder?.id,
-      scheduleList: scheduleControlList
-    } : {
-      id: [0, [Validators.required]],
-      name: ['', [Validators.required]],
-      weight: ['', [Validators.required]],
-      species: ['', [Validators.required]],
-      feederId: undefined,
-      scheduleList: this.formBuilder.array([])
-    });
+    if (pet) {
+      this.form = this.formBuilder.group({
+        id: [pet.id, [Validators.required]],
+        name: [pet.name, [Validators.required]],
+        weight: [pet.weight, [Validators.required]],
+        species: [pet.species, [Validators.required]],
+        feederId: pet.feeder?.id,
+        scheduleList: this.formBuilder.array([])
+      });
+      pet.scheduleList?.forEach(schedule => this.addSchedule(schedule));
+    } else {
+      this.form = this.formBuilder.group({
+        id: [0, [Validators.required]],
+        name: ['', [Validators.required]],
+        weight: ['', [Validators.required]],
+        species: ['', [Validators.required]],
+        feederId: undefined,
+        scheduleList: this.formBuilder.array([])
+      });
+    }
   }
 
-  addSchedule() {
-    this.scheduleList.push(this.formBuilder.control(''));
+  addSchedule(schedule?: Schedule) {
+    if (schedule) {
+      this.scheduleListFA.push(this.formBuilder.group({
+        id: schedule.id,
+        time: [schedule.time, Validators.required],
+        portion: [schedule.portion, Validators.required],
+        pet: [schedule.pet, Validators.required]
+      }));
+    } else {
+      this.scheduleListFA.push(this.formBuilder.group({
+        id: '',
+        time: ['', Validators.required],
+        portion: ['', Validators.required],
+        pet: undefined
+      }));
+    }
   }
 
   removeSchedule(index: number) {
-    this.scheduleList.removeAt(index);
+    this.scheduleListFA.removeAt(index);
     this.form.markAsDirty();
   }
 
-  get scheduleList(): FormArray {
-    return this.form.get('scheduleList') as FormArray;
+  private create(pet: Pet): void {
+    this.petService.create(pet).then(createdPet => {
+      if (this.buildScheduleList().length > 0) {
+        this.setPetInScheduleListFA(createdPet);
+        this.scheduleService.save(this.buildScheduleList()).then(sheduleList => {
+          createdPet.scheduleList = sheduleList;
+          this.sendPet(createdPet);
+          UtilAlert.success({title: 'Mascota y horario creado correctamente'});
+          return;
+        });
+      }
+      this.sendPet(createdPet);
+      UtilAlert.success({title: 'Creado correctamente'});
+    });
+  }
+
+  private update(pet: Pet): void {
+    this.petService.update(pet).then(updatedPet => {
+      if (this.scheduleListFA.dirty && this.buildScheduleList().length > 0) {
+        this.setPetInScheduleListFA(updatedPet);
+        console.log(this.buildScheduleList());
+        this.scheduleService.save(this.buildScheduleList()).then(sheduleList => {
+          updatedPet.scheduleList = sheduleList;
+          this.sendPet(updatedPet);
+          UtilAlert.success({title: 'Mascota y horario editado correctamente'});
+          return;
+        });
+      }
+      this.sendPet(updatedPet);
+      UtilAlert.success({title: 'Editado correctamente'});
+    });
+  }
+
+  private setPetInScheduleListFA(pet: Pet): void {
+    this.scheduleListFA.controls.forEach(scheduleControl =>
+      scheduleControl.get('pet')?.setValue(pet));
   }
 
   private buildPet(): Pet {
@@ -133,15 +154,16 @@ export class PetFormComponent implements OnInit {
       weight: this.form.value.weight,
       species: this.form.value.species,
       feeder: this.feederList.find(feeder => feeder.id === this.form.value.feederId),
-      schedule: this.buildSchedule()
+      scheduleList: this.buildScheduleList()
     };
   }
 
-  private buildSchedule(): Schedule {
-    return {
-      petId: this.form.value.id,
-      scheduleList: this.form.value.scheduleList
-    }
+  private buildScheduleList(): Schedule[] {
+    return this.form.value.scheduleList;
+  }
+
+  get scheduleListFA(): FormArray {
+    return this.form.get('scheduleList') as FormArray;
   }
 
 }

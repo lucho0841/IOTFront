@@ -23,14 +23,20 @@
     <hr>
     <h3><b>Horario Alimentación</b></h3>
     <div formArrayName="scheduleList">
-      <div *ngFor="let schedule of scheduleList.controls; let i = index" class="d-flex justify-content-between">
-        <mat-form-field class="example-full-width">
-          <mat-label>Hora</mat-label>
-          <input matInput type="time" [formControlName]="i">
-        </mat-form-field>
-        <button mat-icon-button matTooltip="Eliminar hora" color="warn" (click)="removeSchedule(i)">
-          <mat-icon>close</mat-icon>
-        </button>
+      <div *ngFor="let schedule of scheduleListFA.controls; let i = index">
+        <div [formGroupName]="i" class="d-flex justify-content-between">
+          <mat-form-field>
+            <mat-label>Hora</mat-label>
+            <input matInput type="time" formControlName="time">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Porción</mat-label>
+            <input matInput type="number" formControlName="portion">
+          </mat-form-field>
+          <button mat-icon-button matTooltip="Eliminar hora" color="warn" (click)="removeSchedule(i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
     <div class="align-right">
