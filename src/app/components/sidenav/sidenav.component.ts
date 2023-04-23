@@ -18,7 +18,7 @@ export class SidenavComponent {
   datosMenu = [{
     title: 'Mascota',
     icon: 'pets',
-    route: '/mascota'
+    route: '/pet'
   }, {
     title: 'Alimentadores',
     icon: 'solar_power',

@@ -8,7 +8,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
-  selector: 'app-mascota',
+  selector: 'app-pet',
   templateUrl: './pet.component.html',
   styleUrls: ['./pet.component.scss']
 })
@@ -62,7 +62,7 @@ export class PetComponent implements OnInit, AfterViewInit {
 
   removePet(petToRemove: Pet) {
     UtilAlert.warningConfirm({
-      title: '🥶 Estas completamente segur@ de quitar esta mascota?',
+      title: '🥶 Estas completamente segur@ de quitar esta pet?',
       buttonText: 'Quitar'
     }).then(answer => {
       if (answer.isConfirmed) {

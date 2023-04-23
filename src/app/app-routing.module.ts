@@ -20,8 +20,8 @@ const routes: Routes = [
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'mascota',
-        loadChildren: () => import('./modules/mascota/pet.module').then(m => m.PetModule)
+        path: 'pet',
+        loadChildren: () => import('./modules/pet/pet.module').then(m => m.PetModule)
       },
       {
         path: 'alimentador',
