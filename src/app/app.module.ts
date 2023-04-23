@@ -15,11 +15,13 @@ import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatMenuModule} from "@angular/material/menu";
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent
+    SidenavComponent,
+    LoadingComponent
   ],
     imports: [
         BrowserModule,
