@@ -129,7 +129,6 @@ export class PetFormComponent implements OnInit {
     this.petService.update(pet).then(updatedPet => {
       if (this.scheduleListFA.dirty && this.buildScheduleList().length > 0) {
         this.setPetInScheduleListFA(updatedPet);
-        console.log(this.buildScheduleList());
         this.scheduleService.save(this.buildScheduleList()).then(sheduleList => {
           updatedPet.scheduleList = sheduleList;
           this.sendPet(updatedPet);
