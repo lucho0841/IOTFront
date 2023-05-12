@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: SidenavComponent,
+    canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
       {
@@ -15,15 +16,15 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'dashboard',
+        path: 'home',
         loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'mascota',
-        loadChildren: () => import('./modules/mascota/pet.module').then(m => m.PetModule)
+        path: 'pet',
+        loadChildren: () => import('./modules/pet/pet.module').then(m => m.PetModule)
       },
       {
-        path: 'feeder',
+        path: 'alimentador',
         loadChildren: () => import('./modules/feeder/feeder.module').then(m => m.FeederModule)
       }
     ]
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'sign-up',
     loadChildren: () => import('./modules/sign-up/sign-up.module').then(m => m.SignUpModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
   }
 ];
 

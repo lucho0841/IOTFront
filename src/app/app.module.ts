@@ -14,25 +14,29 @@ import { MatIconModule } from '@angular/material/icon';
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import {MatMenuModule} from "@angular/material/menu";
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent
+    SidenavComponent,
+    LoadingComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    DashboardModule,
-    MatSidenavModule,
-    MatListModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        DashboardModule,
+        MatSidenavModule,
+        MatListModule,
+        MatMenuModule,
+    ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })

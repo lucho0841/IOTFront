@@ -1,0 +1,16 @@
+<div class="container">
+  <form [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Serial alimentador</mat-label>
+      <input matInput formControlName="serial" value="data">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>nombre alimentador</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+  </form>
+  <div class="actions">
+    <button mat-raised-button mat-dialog-close="" color="warn">Cerrar</button>
+    <button mat-raised-button color="primary" (click)="save()">Guardar</button>
+  </div>
+</div>

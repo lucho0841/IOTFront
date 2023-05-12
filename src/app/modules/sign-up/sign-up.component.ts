@@ -38,7 +38,7 @@ export class SignUpComponent implements OnInit {
   register(): void {
     if (this.form.status == "VALID") {
       if (this.form.controls['password'].value == this.form.controls['confirmPassword'].value) {
-        this.authService.signUp(this.formValue).toPromise().then(() => {
+        this.authService.signUp(this.formValue).then(() => {
           UtilAlert.success({
             title: '😎 Registro completado!',
             text: 'Su usuario ha sido registrado correctamente!',
@@ -58,7 +58,6 @@ export class SignUpComponent implements OnInit {
         buttonText: 'Vale'
       });
     }
-    console.log(this.form.value);
   }
 
   get formValue(): SignUpUser {

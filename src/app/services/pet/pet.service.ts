@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Pet} from "../../models/pets/pet";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -26,48 +25,19 @@ export class PetService {
   }
 
   getAllPetList(): Promise<Pet[]> {
-    return of(this.buildDefaultList()).toPromise();
-    return this.http.get<Pet[]>(`${environment.baseUrl}/pet/all`).toPromise();
+    return this.http.get<Pet[]>(`${environment.baseUrl}/api/pet`).toPromise();
   }
 
   create(pet: Pet): Promise<Pet> {
-    pet.id = 1;
-    return of(pet).toPromise();
-    return this.http.post<Pet>(`${environment.baseUrl}/pet/create`, pet).toPromise();
+    return this.http.post<Pet>(`${environment.baseUrl}/api/pet`, pet).toPromise();
   }
 
   update(pet: Pet): Promise<Pet> {
-    return of(pet).toPromise();
-    return this.http.post<Pet>(`${environment.baseUrl}/pet/update`, pet).toPromise();
+    return this.http.put<Pet>(`${environment.baseUrl}/api/pet`, pet).toPromise();
   }
 
   delete(pet: Pet): Promise<Pet> {
-    return of(pet).toPromise();
-    return this.http.delete<Pet>(`${environment.baseUrl}/pet/delete/${pet.id}`).toPromise();
-  }
-
-  buildDefaultPet(): Pet {
-    return {
-      id: 1,
-      name: 'Lucas',
-      weight: '8kg',
-      species: 'Perro',
-      feeder: undefined
-    };
-  }
-
-  buildDefaultList(): Pet[] {
-    const petList = [];
-    for (let i = 0; i < 10; i++) {
-      petList.push({
-        id: i+1,
-        name: `name${i}`,
-        weight: `weight${i}`,
-        species: `species${i}`,
-        feeder: undefined
-      });
-    }
-    return petList;
+    return this.http.delete<Pet>(`${environment.baseUrl}/api/pet/${pet.id}`).toPromise();
   }
 
 }
