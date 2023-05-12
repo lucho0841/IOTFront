@@ -1,0 +1,11 @@
+mat-form-field {
+  width: 100%;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 20px;
+  justify-content: space-between;
+}
