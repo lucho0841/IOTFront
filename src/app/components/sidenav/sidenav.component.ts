@@ -23,6 +23,11 @@ export class SidenavComponent {
     title: 'Alimentadores',
     icon: 'solar_power',
     route: '/alimentador'
+  },
+  {
+    title: 'Dashboard',
+    icon: 'dashboard',
+    route: '/dashboard'
   }]
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
