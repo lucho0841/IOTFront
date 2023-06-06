@@ -61,6 +61,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.refresxh();
+  }
+
+  refresxh(): void {
     this.columnChart.buildChart();
     this.donutChart.buildChart();
     this.columnGroupChart.buildChart();
@@ -70,31 +74,31 @@ export class DashboardComponent implements OnInit {
     return [
       {
         day: 'Lunes',
-        portion: 300
+        portion: this.getPortionByDay()
       },
       {
         day: 'Martes',
-        portion: 400
+        portion: this.getPortionByDay()
       },
       {
         day: 'Miercoles',
-        portion: 250
+        portion: this.getPortionByDay()
       },
       {
         day: 'Jueves',
-        portion: 350
+        portion: this.getPortionByDay()
       },
       {
         day: 'Viernes',
-        portion: 300
+        portion: this.getPortionByDay()
       },
       {
         day: 'Sabado',
-        portion: 280
+        portion: this.getPortionByDay()
       },
       {
         day: 'Domingo',
-        portion: 340
+        portion: this.getPortionByDay()
       }
     ];
   }
@@ -103,15 +107,15 @@ export class DashboardComponent implements OnInit {
     return [
       {
         schedule: 'Mañana',
-        portion: 100
+        portion: this.getPortionBySchedule()
       },
       {
         schedule: 'Tarde',
-        portion: 150
+        portion: this.getPortionBySchedule()
       },
       {
         schedule: 'Noche',
-        portion: 100
+        portion: this.getPortionBySchedule()
       }
     ];
   }
@@ -120,77 +124,95 @@ export class DashboardComponent implements OnInit {
     return [
       {
         month: 'Ene',
-        overweight: 4,
-        normal: 13,
-        underweight: 2
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Feb',
-        overweight: 5,
-        normal: 11,
-        underweight: 1
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Mar',
-        overweight: 3,
-        normal: 10,
-        underweight: 0
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Abr',
-        overweight: 1,
-        normal: 20,
-        underweight: 5
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'May',
-        overweight: 6,
-        normal: 23,
-        underweight: 2
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Jun',
-        overweight: 8,
-        normal: 11,
-        underweight: 8
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Jul',
-        overweight: 0,
-        normal: 23,
-        underweight: 4
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Ago',
-        overweight: 3,
-        normal: 17,
-        underweight: 1
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Sep',
-        overweight: 5,
-        normal: 19,
-        underweight: 5
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Oct',
-        overweight: 6,
-        normal: 14,
-        underweight: 7
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Nov',
-        overweight: 1,
-        normal: 24,
-        underweight: 1
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       },
       {
         month: 'Dic',
-        overweight: 8,
-        normal: 15,
-        underweight: 2
+        overweight: this.getPetNumberByWeight(),
+        normal: this.getPetNumberByWeight(),
+        underweight: this.getPetNumberByWeight()
       }
     ];
+  }
+
+  getRandomInt(min: number, max: number): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  getPortionByDay(): number {
+    return this.getRandomInt(120, 1000);
+  }
+
+  getPortionBySchedule(): number {
+    return this.getRandomInt(50, 330);
+  }
+
+  getPetNumberByWeight(): number {
+    return this.getRandomInt(0, 30);
   }
 
 }
