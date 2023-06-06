@@ -38,6 +38,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/sign-up/sign-up.module').then(m => m.SignUpModule)
   },
   {
+    path: 'test',
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
