@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {LoginUser} from 'src/app/models/auth/login-user';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {TokenService} from 'src/app/services/auth/token/token.service';
-import Swal from 'sweetalert2';
+import {UtilAlert} from "../../util/util-alert";
 
 @Component({
   selector: 'app-login',
@@ -12,9 +12,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
   form!: FormGroup;
-  isLogged = false;
-  errMsj!: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,30 +27,20 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
   }
-//todo hacer clase utilitaria para los mensajes
+
   login(): void {
     if (this.form.status == "VALID") {
-      this.authService.login(this.formValue).toPromise().then(token => {
-        this.isLogged = true;
+      this.authService.login(this.formValue).then(token => {
         this.tokenService.setToken(token);
-        this.router.navigateByUrl(sessionStorage.getItem('redirectTo') || '/dashboard');
-      }).catch(err => {
-        this.isLogged = false;
-        this.errMsj = err.error.message;
-        Swal.fire({
-          title: 'Error!',
-          text: 'Revise si ingreso correctamente el correo o la contraseña',
-          icon: 'error',
-          confirmButtonText: 'Vale'
-        })
+        UtilAlert.success();
+        this.router.navigateByUrl(sessionStorage.getItem('redirectTo') || '/dashboard').then();
       });
     } else {
-      Swal.fire({
+      UtilAlert.warning({
         title: 'Error!',
         text: 'Revise si ingreso correctamente el correo o la contraseña',
-        icon: 'error',
-        confirmButtonText: 'Vale'
-      })
+        buttonText: 'Vale'
+      });
     }
   }
 

@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.add-button {
+  width: 100%;
+  min-width: min(100px, max(100%, 100px));
+  max-width: min(100%, 150px);
+}
+
+.scroll {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-header-row {
+  position: sticky;
+  top: 0;
+  background: #444444;
+}
+
+.mat-header-cell {
+  color: whitesmoke;
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.mat-cell {
+  padding: 10px;
+}
+
+.actions-header {
+  text-align: end;
+}
+
+.actions {
+  display: grid;
+  height: inherit;
+  justify-content: end;
+  align-content: center;
+}
+
+.mat-menu-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.mat-menu-button mat-icon {
+  margin: 0;
+}
+
+.delete-color {
+  color: #d10e00;
+}

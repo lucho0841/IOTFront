@@ -1,0 +1,53 @@
+<div class="container">
+  <form [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Nombre mascota</mat-label>
+      <input matInput formControlName="name" value="data">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Peso mascota</mat-label>
+      <input matInput type="number" formControlName="weight">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Especie</mat-label>
+      <input matInput formControlName="species">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccione un alimentador</mat-label>
+      <mat-select formControlName="feederId">
+        <mat-option *ngFor="let feeder of feederList" [value]="feeder.id">
+          {{feeder.serial}} -> {{feeder.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <hr>
+    <h3><b>Horario Alimentación</b></h3>
+    <div formArrayName="scheduleList">
+      <div *ngFor="let schedule of scheduleListFA.controls; let i = index">
+        <div [formGroupName]="i" class="d-flex justify-content-between">
+          <mat-form-field>
+            <mat-label>Hora</mat-label>
+            <input matInput type="time" formControlName="time">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Porción</mat-label>
+            <input matInput type="number" formControlName="portion">
+          </mat-form-field>
+          <button mat-icon-button matTooltip="Eliminar hora" color="warn" (click)="removeSchedule(i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="align-right">
+      <button mat-mini-fab matTooltip="Agregar hora" color="accent" (click)="addSchedule()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </form>
+  <div class="actions">
+    <button mat-raised-button mat-dialog-close="" color="warn">Cerrar</button>
+    <button mat-raised-button color="primary" (click)="save()">Guardar</button>
+  </div>
+</div>
+
