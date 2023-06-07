@@ -1,6 +1,11 @@
 <div class="container">
-  <button mat-raised-button color="primary" (click)="addNewPet()" class="add-button">Agregar
-  </button>
+  <section class="d-flex justify-content-between mb-3">
+    <h1 class="h1 m-0 p-0"><b>Mis Mascotas 🦥</b></h1>
+    <button mat-raised-button color="primary" (click)="addNewPet()" class="add-button">
+      <span>Agregar </span>
+      <mat-icon>add</mat-icon>
+    </button>
+  </section>
   <div class="scroll">
     <table mat-table [dataSource]="dataSource" matSort class="mat-table mat-elevation-z8">
       <ng-container matColumnDef="id">
