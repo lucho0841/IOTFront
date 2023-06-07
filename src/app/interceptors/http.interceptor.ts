@@ -26,14 +26,23 @@ export class MyHttpInterceptor implements HttpInterceptor {
     }
     return next.handle(intReq).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        let errorMessage = 'Error desconocido';
+
         if (error.error instanceof ErrorEvent) {
-          console.log('error desde el cliente');
-          UtilAlert.error({text: error.error.message});
+          // Error del lado del cliente
+          errorMessage = `Error: ${error.error?.message}`;
+          UtilAlert.error({text: errorMessage});
         } else {
-          console.log('error desde el servidor');
-          UtilAlert.error({text: error.error.message});
+          // Error del lado del servidor
+          if (error.status == 403 && error.url?.includes('/login')) {
+            UtilAlert.warning({title: 'No se pudo iniciar sesión 😢', text: 'Nombre de usuario o contraseña incorrectos'});
+          } else {
+            UtilAlert.error({text: error.error?.humanMessage});
+          }
         }
-        return throwError(error.error.message);
+
+        return throwError(errorMessage);
       }),
       finalize(() => this.loadingService.hide())
     );
