@@ -70,7 +70,7 @@ export class PetComponent implements OnInit, AfterViewInit {
           const index = this.petList.findIndex(pet => pet.id === deletedPet.id);
           this.petList.splice(index, 1);
           this.updateDataList();
-          UtilAlert.success({title: 'Eliminado exitoso'});
+          UtilAlert.success({title: 'Mascota y horario eliminados correctamente'});
         });
       }
     });
