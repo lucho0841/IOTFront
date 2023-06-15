@@ -13,6 +13,7 @@ import {Feeder} from "../../../../models/feeder/feeder";
 export class FeederFormComponent implements OnInit {
 
   form!: FormGroup;
+  disable!: boolean;
 
   constructor(private formBuilder: FormBuilder, private feederService: FeederService, private dialogRef: MatDialogRef<any>) {
   }
@@ -63,6 +64,9 @@ export class FeederFormComponent implements OnInit {
       serial: ['', [Validators.required]],
       name: ['', [Validators.required]]
     });
+    if (this.feederService.getFeeder()) {
+      this.disable = true;
+    }
   }
 
   get formValue(): Feeder {

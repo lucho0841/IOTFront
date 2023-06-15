@@ -84,13 +84,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "IOTFront:build",
-            "proxyConfig": "proxy.conf.json"
+            "browserTarget": "IOTFront:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "IOTFront:build:production",
-              "proxyConfig": "proxy.conf.json"
+              "browserTarget": "IOTFront:build:production"
             },
             "development": {
               "browserTarget": "IOTFront:build:development"

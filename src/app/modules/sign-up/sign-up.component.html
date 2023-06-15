@@ -11,12 +11,22 @@
               <mat-form-field class="example-full-width">
                 <mat-label>Nombre completo</mat-label>
                 <input matInput formControlName="fullName">
+                <mat-error *ngIf="form.get('fullName')?.hasError('required')">
+                  Este campo es requerido!
+                </mat-error>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field class="example-full-width">
                 <mat-label>Celular</mat-label>
                 <input matInput formControlName="phoneNumber">
+                <mat-hint>Escriba un número válido</mat-hint>
+                <mat-error *ngIf="form.get('phoneNumber')?.hasError('required') && form.get('phoneNumber')?.dirty">
+                  Este campo es requerido!
+                </mat-error>
+                <mat-error *ngIf="form.get('phoneNumber')?.dirty">
+                  El número ingresado no es válido!
+                </mat-error>
               </mat-form-field>
             </td>
           </tr>
@@ -26,14 +36,30 @@
           <mat-form-field class="example-full-width">
             <mat-label>Correo</mat-label>
             <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.dirty">
+              El correo ingresado no es válido (example@example.com)
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Contraseña</mat-label>
-            <input matInput type="password" formControlName="password">
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            <mat-error *ngIf="form.get('password')?.hasError('required') && form.get('password')?.dirty">
+              Este campo es requerido!
+            </mat-error>
+            <mat-error *ngIf=" form.get('password')?.dirty">
+              La contraseña debe contener almenos 8 caracteres, un número, una letra Mayúscula y una minúscula
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Confirmar contraseña</mat-label>
             <input matInput type="password" formControlName="confirmPassword">
+            <mat-error *ngIf="form.get('confirmPassword')?.hasError('required') && form.get('confirmPassword')?.dirty">
+              Este campo es requerido!
+            </mat-error>
+            <mat-error *ngIf="form.get('confirmPassword')?.dirty">
+              La confirmación de la contraseña debe ser igual a la contraseña ingresada anteriormente!
+            </mat-error>
           </mat-form-field>
         </p>
       </form>

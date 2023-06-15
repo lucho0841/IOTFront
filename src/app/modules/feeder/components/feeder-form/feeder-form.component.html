@@ -2,7 +2,8 @@
   <form [formGroup]="form">
     <mat-form-field class="example-full-width">
       <mat-label>Serial alimentador</mat-label>
-      <input matInput formControlName="serial" value="data">
+      <input matInput formControlName="serial" value="data" *ngIf="!disable">
+      <input matInput formControlName="serial" value="data" *ngIf="disable" readonly>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>nombre alimentador</mat-label>

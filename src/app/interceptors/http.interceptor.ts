@@ -10,11 +10,12 @@ import {TokenService} from "../services/auth/token/token.service";
 import {UtilAlert} from "../util/util-alert";
 import {catchError, finalize} from "rxjs/operators";
 import {LoadingService} from "../services/loading/loading.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class MyHttpInterceptor implements HttpInterceptor {
 
-  constructor(private tokenService: TokenService, private loadingService: LoadingService) {
+  constructor(private tokenService: TokenService, private loadingService: LoadingService, private router: Router) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -36,7 +37,17 @@ export class MyHttpInterceptor implements HttpInterceptor {
         } else {
           // Error del lado del servidor
           if (error.status == 403 && error.url?.includes('/login')) {
-            UtilAlert.warning({title: 'No se pudo iniciar sesión 😢', text: 'Nombre de usuario o contraseña incorrectos'});
+            UtilAlert.warning({
+              title: 'No se pudo iniciar sesión 😢',
+              text: 'Nombre de usuario o contraseña incorrectos'
+            });
+          } else if (error.status == 403) {
+            UtilAlert.warning({
+              title: 'Se ha expirado su sesión 😢',
+              text: 'Por favor vuelve a iniciar sesion',
+              buttonText: 'Entendido 😊'
+            });
+            this.router.navigateByUrl('login');
           } else {
             UtilAlert.error({text: error.error?.humanMessage});
           }

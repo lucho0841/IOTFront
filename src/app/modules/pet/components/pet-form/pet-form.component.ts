@@ -39,7 +39,7 @@ export class PetFormComponent implements OnInit {
       });
   }
 
-  save(): void {
+  async save(): Promise<void> {
     try {
       this.validateForm();
     } catch (error) {
@@ -48,8 +48,8 @@ export class PetFormComponent implements OnInit {
     }
 
     const pet: Pet = this.buildPet();
-    if (pet.id > 0) this.update(pet);
-    else this.create(pet);
+    if (pet.id > 0) await this.update(pet);
+    else await this.create(pet);
   }
 
   validateForm(): void {
@@ -106,39 +106,44 @@ export class PetFormComponent implements OnInit {
 
   removeSchedule(index: number) {
     this.scheduleListFA.removeAt(index);
-    this.form.markAsDirty();
+    this.scheduleListFA.markAsDirty();
   }
 
-  private create(pet: Pet): void {
-    this.petService.create(pet).then(createdPet => {
-      if (this.buildScheduleList().length > 0) {
-        this.setPetInScheduleListFA(createdPet);
-        this.scheduleService.save(this.buildScheduleList()).then(sheduleList => {
-          createdPet.scheduleList = sheduleList;
-          this.sendPet(createdPet);
-          UtilAlert.success({title: 'Mascota y horario creado correctamente'});
-          return;
-        });
-      }
+  private async create(pet: Pet): Promise<void> {
+    const createdPet: Pet = await this.petService.create(pet);
+    if (this.scheduleListFA.dirty && this.buildScheduleList().length > 0) {
+      this.setPetInScheduleListFA(createdPet);
+      this.scheduleService.save(this.buildScheduleList()).then(sheduleList => {
+        createdPet.scheduleList = sheduleList;
+        this.sendPet(createdPet);
+        UtilAlert.success({title: 'Mascota y horario creados correctamente'});
+      });
+    } else {
       this.sendPet(createdPet);
-      UtilAlert.success({title: 'Creado correctamente'});
-    });
+      UtilAlert.success({title: 'Mascota creada correctamente'});
+    }
   }
 
-  private update(pet: Pet): void {
-    this.petService.update(pet).then(updatedPet => {
-      if (this.scheduleListFA.dirty && this.buildScheduleList().length > 0) {
+  private async update(pet: Pet): Promise<void> {
+    const updatedPet: Pet = await this.petService.update(pet);
+    if (this.scheduleListFA.dirty) {
+      if (this.buildScheduleList().length > 0) {
         this.setPetInScheduleListFA(updatedPet);
         this.scheduleService.save(this.buildScheduleList()).then(sheduleList => {
           updatedPet.scheduleList = sheduleList;
           this.sendPet(updatedPet);
-          UtilAlert.success({title: 'Mascota y horario editado correctamente'});
-          return;
+          UtilAlert.success({title: 'Mascota y horario editados correctamente'});
         });
+      } else {
+        await this.scheduleService.deleteAllBy(updatedPet.id);
+        updatedPet.scheduleList = [];
+        this.sendPet(updatedPet);
+        UtilAlert.success({title: 'Mascota y horario editados correctamente'});
       }
+    } else {
       this.sendPet(updatedPet);
-      UtilAlert.success({title: 'Editado correctamente'});
-    });
+      UtilAlert.success({title: 'Mascota editada correctamente'});
+    }
   }
 
   private setPetInScheduleListFA(pet: Pet): void {

@@ -5,6 +5,8 @@ import {SignUpUser} from 'src/app/models/auth/sign-up-user';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {UtilAlert} from "../../util/util-alert";
 
+const MOBILE_PATTERN = /^[0-9]{10,10}$/;
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -13,6 +15,7 @@ import {UtilAlert} from "../../util/util-alert";
 export class SignUpComponent implements OnInit {
 
   form!: FormGroup;
+  hide = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +31,7 @@ export class SignUpComponent implements OnInit {
   private buildForm(): void {
     this.form = this.formBuilder.group({
       fullName: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(MOBILE_PATTERN)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],

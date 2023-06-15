@@ -17,4 +17,8 @@ export class ScheduleService {
   save(scheduleList: Schedule[]): Promise<Schedule[]> {
     return this.http.post<Schedule[]>(`${environment.baseUrl}/api/pet-schedule`, scheduleList).toPromise();
   }
+
+  deleteAllBy(petId: number): Promise<void> {
+    return this.http.delete<void>(`${environment.baseUrl}/api/pet-schedule/${petId}`).toPromise();
+  }
 }
