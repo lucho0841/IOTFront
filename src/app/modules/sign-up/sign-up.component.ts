@@ -15,6 +15,7 @@ const MOBILE_PATTERN = /^[0-9]{10,10}$/;
 export class SignUpComponent implements OnInit {
 
   form!: FormGroup;
+  hide = true;
 
   constructor(
     private formBuilder: FormBuilder,
